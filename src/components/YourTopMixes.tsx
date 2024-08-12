@@ -59,8 +59,8 @@ function YourTopMixes() {
                                 </div>
                             </div>
 
-                            <h5 className='self-stretch relative tracking-[0.03em] text-base md:text-xl text-white mb-2'><b>{mix.title}</b></h5>
-                            <h6 className='self-stretch relative text-base md:text-[1.125rem] md:leading-[1.278rem] text-darkgray-100'>{mix.description}</h6>
+                            <h5 className='self-stretch relative tracking-[0.03em] text-base md:text-xl text-white line-clamp-2 font-bold mb-2'>{mix.title}</h5>
+                            <h6 className='self-stretch relative text-base md:text-[1.125rem] md:leading-[1.278rem] text-darkgray-100 line-clamp-2'>{mix.description}</h6>
                         </div>
                     ))}
                 </div>
