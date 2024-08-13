@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from "next/image";
-import Link from 'next/link';
 
-function MadeForYou() {
+function ListingMadeForYou() {
+
     const madeForYou = [
         {
             imageSrc: '/album-art@2x.png',
@@ -29,22 +29,56 @@ function MadeForYou() {
             title: 'Daily Mix 1',
             description: 'Ayra Starr, Lil Kesh, Ed Sheeran and more'
         },
+
+        {
+            imageSrc: '/album-art-1@2x.png',
+            title: 'Pop Mix',
+            description: 'Hey Violet, VÉRITÉ, Timeflies and more'
+        },
+        {
+            imageSrc: '/album-art-3@2x.png',
+            title: 'Indie Mix',
+            description: 'Joywave, The xx, The Neighbourhood and...'
+        },
+        {
+            imageSrc: '/album-art@2x.png',
+            title: 'Chill Mix',
+            description: 'Julia Wolf, Khalid, ayokay and more'
+        },
+        {
+            imageSrc: '/album-art-2@2x.png',
+            title: 'Pheelz Mix',
+            description: 'WizKid, Asake, Tiwa Savage and more'
+        },
+        {
+            imageSrc: '/album-art-4@2x.png',
+            title: 'Daily Mix 1',
+            description: 'Ayra Starr, Lil Kesh, Ed Sheeran and more'
+        },
+
+        {
+            imageSrc: '/album-art@2x.png',
+            title: 'Chill Mix',
+            description: 'Julia Wolf, Khalid, ayokay and more'
+        },
+        {
+            imageSrc: '/album-art-1@2x.png',
+            title: 'Pop Mix',
+            description: 'Hey Violet, VÉRITÉ, Timeflies and more'
+        },
     ];
+
     return (
         <>
-            <div className='px-4 lg:px-10'>
-                {/* TITLE AND SEE ALL */}
-                <div className='flex justify-between mb-5 md:mb-[26px]'>
-                    <h2 className='tracking-[-0.03em] text-[1.125rem] md:text-[1.5rem] lg:text-3xl font-bold text-white'>Made for you</h2>
-                    <Link href="/madeForYou" className='text-base tracking-[0.08em] inline-block text-darkgray-200 mt-auto cursor-pointer'>
-                        <b>SEE ALL</b>
-                    </Link>
+            <div className='px-4 lg:px-10 mt-6 lg:mt-10 mb-12'>
+                <div className=' mb-9'>
+                    <h2 className='text-[1.188rem] md:text-[1.625rem] lg:text-[2rem] text-white tracking-[-0.05em] font-bold'>Made for you</h2>
                 </div>
 
                 {/* TOP MADE FOR YOU LIST */}
-                <div className='flex lg:grid lg:grid-cols-5 gap-4 2xl:gap-[54px] overflow-auto pb-6'>
+                <div className='grid grid-cols-2 lg:grid-cols-5 gap-4 2xl:gap-[30px]'>
                     {madeForYou.map((made, index) => (
-                        <div key={index} className='w-[224px] lg:w-auto flex-shrink-0 bg-gray-1400 transition hover:bg-gray-1500 hover:transition rounded-lg p-5 cursor-pointer overflow-hidden group'>
+                        <div key={index} className='flex-shrink-0 bg-gray-1400 transition hover:bg-gray-1500 hover:transition rounded-lg p-5 cursor-pointer overflow-hidden group'>
                             <div className='relative'>
                                 <Image
                                     src={made.imageSrc}
@@ -69,4 +103,4 @@ function MadeForYou() {
     )
 }
 
-export default MadeForYou
+export default ListingMadeForYou

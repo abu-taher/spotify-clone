@@ -7,7 +7,7 @@ function Sidebar() {
     const pathname = usePathname();
 
     return (
-        <div className='bg-black w-[310px] h-screen hidden lg:block'>
+        <div className='bg-black w-[310px] h-[calc(100vh-72px)] hidden lg:block'>
             {/* NAVBAR */}
             <nav className='py-4 px-7'>
                 {/* LIST */}
