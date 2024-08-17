@@ -29,8 +29,8 @@ interface Track {
   artist: string;
   album: string;
   track_album_image: string;
-  picture:String;
-  type:String
+  picture: string;
+  type: string
 }
 
 

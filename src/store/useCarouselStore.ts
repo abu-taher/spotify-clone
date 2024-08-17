@@ -5,9 +5,9 @@ interface Track {
   title: string;
   duration: number;
   preview: string;
-  artist: String;
+  artist: string;
   album: string;
-  track_album_image: String
+  track_album_image: string
 }
 
 interface AlbumDetails {
