@@ -35,7 +35,7 @@ function MadeForYou() {
         {/* TOP MADE FOR YOU LIST */}
         <div className="flex lg:grid lg:grid-cols-5 gap-4 2xl:gap-[54px] overflow-auto pb-6">
           {madeForYou?.slice(0, 5)?.map((made, index) => (
-            <Link href={`/madeForYou/tracks/${made.id}`}>
+            <Link href={`/madeForYou/tracks/${made.id}`} key={made.id}>
                 <div
               key={index}
               className="w-[224px] lg:w-auto h-full flex-shrink-0 bg-gray-1400 transition hover:bg-gray-1500 hover:transition rounded-lg p-5 cursor-pointer overflow-hidden group"

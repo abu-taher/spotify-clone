@@ -26,7 +26,7 @@ function ListingMadeForYou() {
                 {/* TOP MADE FOR YOU LIST */}
                 <div className='grid grid-cols-2 lg:grid-cols-5 gap-4 2xl:gap-[30px]'>
                     {madeForYou?.map((made, index) => (
-                        <Link href={`/madeForYou/tracks/${made.id}`}>
+                        <Link href={`/madeForYou/tracks/${made.id}`} key={made.id}>
                             <div key={index} className='flex-shrink-0 bg-gray-1400 transition hover:bg-gray-1500 hover:transition rounded-lg p-5 cursor-pointer overflow-hidden group'>
                             <div className='relative'>
                                 <Image
@@ -41,17 +41,15 @@ function ListingMadeForYou() {
                                     <button className='w-[62px] h-[62px] rounded-full bg-lightgreen flex items-center justify-center shadow-[0px_8px_8px_rgba(0,0,0,.3)]'><svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" className=' w-7 h-[30px]'><path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z" /></svg></button>
                                 </div>
                             </div>
-
                             <h5 className='self-stretch relative tracking-[0.03em] text-base md:text-xl text-white line-clamp-2 font-bold mb-2'>{made?.title}</h5>
                             <h6 className='self-stretch relative text-base md:text-[1.125rem] md:leading-[1.278rem] text-darkgray-100 line-clamp-2'>{made?.type}</h6>
                         </div>
                         </Link>
-
+                        
                     ))}
                 </div>
             </div>
         </>
     )
 }
-
 export default ListingMadeForYou

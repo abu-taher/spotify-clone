@@ -31,4 +31,7 @@ const MyCarousel = forwardRef<any, CarouselProps>(({ children, options, onScroll
   );
 });
 
+// Assign a display name to the component
+MyCarousel.displayName = 'MyCarousel';
+
 export default MyCarousel;

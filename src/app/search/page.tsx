@@ -7,7 +7,7 @@ import Sidebar from '@/components/Sidebar'
 import { useSearchStore } from '@/store/useSearchStore'
 import React from 'react'
 
-function page() {
+function Page() {
     const { query } = useSearchStore();
     return (
         <>
@@ -24,4 +24,4 @@ function page() {
     )
 }
 
-export default page
+export default Page

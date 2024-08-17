@@ -25,7 +25,7 @@ function ListingYourTopMixes() {
                 {/* TOP MIX LIST */}
                 <div className='grid grid-cols-2 lg:grid-cols-5 gap-4 2xl:gap-[30px]'>
                     {topMixes?.map((mix, index) => (
-                        <Link href={`/yourTopMixes/tracks/${mix?.id}`}>
+                        <Link href={`/yourTopMixes/tracks/${mix?.id}`} key={mix.id}>
                             <div key={index} className='flex-shrink-0 bg-gray-1400 transition hover:bg-gray-1500 hover:transition rounded-lg p-5 cursor-pointer overflow-hidden group'>
                             <div className='relative'>
                                 <Image
