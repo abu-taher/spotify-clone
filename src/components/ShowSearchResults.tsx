@@ -22,7 +22,7 @@ const ShowSearchResults = () => {
         <h2 className='text-[1.188rem] md:text-[1.625rem] lg:text-[2rem] text-white tracking-[-0.05em] font-bold'>Results</h2>
       </div>
 
-      <div className='grid grid-cols-5 gap-4 2xl:gap-8'>
+      <div className='grid grid-cols-2 lg:grid-cols-5 gap-4 2xl:gap-8'>
         {paginatedResults.map((result, index) => (
           <div key={index} className='rounded-lg bg-gray-1400 transition hover:bg-gray-1500 hover:transition pt-5 px-5 pb-7 cursor-pointer overflow-hidden group'>
             <div className='relative'>
