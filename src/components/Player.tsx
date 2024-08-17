@@ -34,14 +34,14 @@ function Player() {
   const audioElementRef = useRef<HTMLAudioElement>(null);
   useEffect(() => {
     if (audioElementRef.current && currentTrack) {
-        // Only set the src if it's a new track
-        if (audioElementRef.current.src !== currentTrack.preview) {
-            audioElementRef.current.src = currentTrack.preview;
-            audioElementRef.current.currentTime = 0; // Reset to start for a new track
-        }
-        if (isPlaying) {
-            audioElementRef.current.play();
-        }
+      // Only set the src if it's a new track
+      if (audioElementRef.current.src !== currentTrack.preview) {
+        audioElementRef.current.src = currentTrack.preview;
+        audioElementRef.current.currentTime = 0; // Reset to start for a new track
+      }
+      if (isPlaying) {
+        audioElementRef.current.play();
+      }
     }
 }, [currentTrack]);  // Removed `isPlaying` from dependencies to avoid resetting on pause/play
 
@@ -55,16 +55,6 @@ useEffect(() => {
         audioElementRef.current?.removeEventListener("timeupdate", updateTime);
     };
 }, [updateTime]);
-
-
-//   useEffect(() => {
-//     if (currentTrack && audioElementRef.current) {
-//       audioElementRef.current.src = currentTrack.preview;
-//       if (isPlaying) {
-//         audioElementRef.current.play();
-//       }
-//     }
-//   }, [currentTrack, isPlaying]);
 
   return (
     <div className="fixed bottom-0 left-0 right-0 w-full h-[84px] bg-black flex items-center flex-row justify-between px-2">
@@ -109,20 +99,24 @@ useEffect(() => {
           </div>
           <div className="flex items-center justify-center space-x-2 w-full">
             <span className="text-darkgray-100 text-xs leading-none">
-              {Math.floor(currentTime / 60)}:
-              {("0" + Math.floor(currentTime % 60)).slice(-2)}
+              {!isNaN(currentTime) ? Math.floor(currentTime / 60) : "0"}:
+              {!isNaN(currentTime)
+                ? ("0" + Math.floor(currentTime % 60)).slice(-2)
+                : "00"}
             </span>
             <input
               type="range"
               min="0"
-              max={duration}
-              value={currentTime}
+              max={isNaN(duration) ? 0 : duration}
+              value={isNaN(currentTime) ? 0 : currentTime}
               onChange={(e) => handleProgressChange(Number(e.target.value))}
               className="w-full max-w-[552px] custom-range"
             />
             <span className="text-darkgray-100 text-xs leading-none">
-              {Math.floor(duration / 60)}:
-              {("0" + Math.floor(duration % 60)).slice(-2)}
+              {!isNaN(duration) ? Math.floor(duration / 60) : "0"}:
+              {!isNaN(duration)
+                ? ("0" + Math.floor(duration % 60)).slice(-2)
+                : "00"}
             </span>
           </div>
         </div>
@@ -150,7 +144,7 @@ useEffect(() => {
           background-size: ${`${(currentTime / duration) * 100}% 100%`};
         }
         input[type="range"].custom-volume::-webkit-slider-runnable-track {
-          background-size: ${volume * 100}% 100%; /* Update background-size based on volume */
+          background-size: ${volume * 100}% 100%;
         }
       `}</style>
     </div>
