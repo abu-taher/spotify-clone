@@ -33,7 +33,7 @@ function YourTopMixes() {
         {/* TOP MIX LIST */}
         <div className="flex lg:grid lg:grid-cols-5 gap-4 2xl:gap-[54px] overflow-auto pb-6">
           {topMixes?.slice(0, 5)?.map((mix, index) => (
-            <Link href={`/yourTopMixes/tracks/${mix?.id}`}>
+            <Link href={`/yourTopMixes/tracks/${mix?.id}`} key={mix.id}>
               <div
                 key={index}
                 className="w-[224px] lg:w-auto h-full flex-shrink-0 bg-gray-1400 transition hover:bg-gray-1500 hover:transition rounded-lg p-5 cursor-pointer overflow-hidden group"
