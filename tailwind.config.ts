@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       backgroundImage: {
         'main-color': 'linear-gradient(180deg, #3333a3, #121212)',
+        'yellow-color': 'linear-gradient(180deg, #DEF628, #121212)',
       },
       colors: {
         darkgray: {
@@ -17,6 +18,7 @@ const config: Config = {
           "200": "#adadad",
           "300": "#a6a6a6",
           "400": "#999",
+          "500": "#666666",
         },
         white: "#fff",
         gray: {
@@ -35,6 +37,9 @@ const config: Config = {
           "1300": "rgba(255, 255, 255, 0.2)",
           "1400": "rgba(255, 255, 255, 0.04)",
           "1500": "rgba(255, 255, 255, 0.08)",
+          "1600": "rgba(255, 255, 255, 0.7)",
+          "1700": "rgba(18, 18, 18, 0.3)",
+          "1800": "hsla(0, 0%, 100%, .3)",
         },
         black: "#000",
         slateblue: {

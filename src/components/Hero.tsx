@@ -1,7 +1,10 @@
 "use client"
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from "next/image";
 import MyCarousel from './MyCarousel';
+import { useCarouselStore } from '@/store/useCarouselStore';
+import HeaderSkeleton from './loaders/HeaderSkeleton';
+import Link from 'next/link';
 
 type CarouselHandle = {
   scrollPrev: () => void;
@@ -11,72 +14,11 @@ type CarouselHandle = {
 function Hero() {
   const carouselRef = useRef<CarouselHandle>(null);
 
-  const carouselData = {
-    "carousel": [
-      {
-        "slideId": 1,
-        "albums": [
-          {
-            "albumId": 1,
-            "title": "Chill Mix",
-            "image": "/album-art@2x.png"
+  const { carousel, loading, error, fetchCarousel } = useCarouselStore(); 
 
-          },
-          {
-            "albumId": 2,
-            "title": "Daily Mix 5",
-            "image": "/album-art-7@2x.png"
-          }
-        ],
-      },
-      {
-        "slideId": 2,
-        "albums": [
-          {
-            "albumId": 3,
-            "title": "Pop Mix",
-            "image": "/album-art-1@2x.png"
-          },
-          {
-            "albumId": 4,
-            "title": "Folk & Acoustic Mix",
-            "image": "/album-art-5@2x.png"
-          }
-        ],
-      },
-      {
-        "slideId": 3,
-        "albums": [
-          {
-            "albumId": 5,
-            "title": "Daily Mix 1",
-            "image": "/album-art-4@2x.png"
-          },
-          {
-            "albumId": 6,
-            "title": "Daily Mix 4",
-            "image": "/album-cover-2@2x.png"
-          }
-        ],
-      },
-      {
-        "slideId": 4,
-        "albums": [
-          {
-            "albumId": 7,
-            "title": "Folk & Acoustic Mix",
-            "image": "/album-art-5@2x.png"
-          },
-          {
-            "albumId": 8,
-            "title": "Chill Mix",
-            "image": "/album-art@2x.png"
-
-          }
-        ],
-      }
-    ]
-  };
+  useEffect(() => {
+    fetchCarousel();
+  }, [fetchCarousel]);
 
   const scrollPrev = () => {
     if (carouselRef.current) {
@@ -89,6 +31,12 @@ function Hero() {
       carouselRef.current.scrollNext();
     }
   };
+
+  if (loading)
+    return (
+      <HeaderSkeleton/>
+    );
+  if (error) return <p>{error}</p>; 
 
   return (
     <>
@@ -166,24 +114,25 @@ function Hero() {
                 ref={carouselRef}
                 options={{ loop: true }}
               >
-                {carouselData.carousel.map((slide) => (
+                {carousel?.map((slide) => (
                   <div
-                    key={slide.slideId}
+                    key={slide?.slideId}
                     className={`flex flex-col space-y-4`}
                   >
-                    {slide.albums.map((album) => (
+                    {slide?.albums?.map((album) => (
+                      <Link href={`/tracks/${album?.albumId}`}>
                       <div
-                        key={album.albumId}
+                        key={album?.albumId}
                         className='relative bg-gray-800 transition hover:bg-gray-1300 hover:transition rounded-md flex items-center gap-5 group'
                       >
                         <Image
-                          src={album.image}
+                          src={album?.image}
                           width={364}
                           height={364}
-                          alt={album.title}
+                          alt={album?.title}
                           className='w-[82px] h-[82px]'
                         />
-                        <h3 className='relative text-base md:text-xl tracking-[0.01em] inline-block'><b>{album.title}</b></h3>
+                        <h3 className='relative text-base md:text-xl tracking-[0.01em] inline-block'><b>{album?.title}</b></h3>
 
                         {/* PLAY BUTTON */}
                         <div className='absolute right-5 w-[62px] h-[62px] flex cursor-pointer opacity-0 transition group-hover:opacity-100 group-hover:transition'>
@@ -194,6 +143,7 @@ function Hero() {
                           </button>
                         </div>
                       </div>
+                      </Link>
                     ))}
                   </div>
                 ))}

@@ -1,72 +1,19 @@
-import React from 'react'
+'use client';
+import React, { useEffect } from 'react'
 import Image from "next/image";
+import { useTopMixesStore } from '@/store/useTopMixesStore';
+import TopMixesSectionSkeleton from './loaders/TopMixesSectionSkeleton';
+import Link from 'next/link';
 
 function ListingYourTopMixes() {
+    const { topMixes, isLoading, error, fetchTopMixes } = useTopMixesStore();
 
-    const topMixes = [
-        {
-            imageSrc: '/album-art@2x.png',
-            title: 'Chill Mix',
-            description: 'Julia Wolf, Khalid, ayokay and more'
-        },
-        {
-            imageSrc: '/album-art-1@2x.png',
-            title: 'Pop Mix',
-            description: 'Hey Violet, VÉRITÉ, Timeflies and more'
-        },
-        {
-            imageSrc: '/album-art-2@2x.png',
-            title: 'Pheelz Mix',
-            description: 'WizKid, Asake, Tiwa Savage and more'
-        },
-        {
-            imageSrc: '/album-art-3@2x.png',
-            title: 'Indie Mix',
-            description: 'Joywave, The xx, The Neighbourhood and...'
-        },
-        {
-            imageSrc: '/album-art-4@2x.png',
-            title: 'Daily Mix 1',
-            description: 'Ayra Starr, Lil Kesh, Ed Sheeran and more'
-        },
+    useEffect(() => {
+      fetchTopMixes();
+    }, [fetchTopMixes]);
 
-        {
-            imageSrc: '/album-art-1@2x.png',
-            title: 'Pop Mix',
-            description: 'Hey Violet, VÉRITÉ, Timeflies and more'
-        },
-        {
-            imageSrc: '/album-art-3@2x.png',
-            title: 'Indie Mix',
-            description: 'Joywave, The xx, The Neighbourhood and...'
-        },
-        {
-            imageSrc: '/album-art@2x.png',
-            title: 'Chill Mix',
-            description: 'Julia Wolf, Khalid, ayokay and more'
-        },
-        {
-            imageSrc: '/album-art-2@2x.png',
-            title: 'Pheelz Mix',
-            description: 'WizKid, Asake, Tiwa Savage and more'
-        },
-        {
-            imageSrc: '/album-art-4@2x.png',
-            title: 'Daily Mix 1',
-            description: 'Ayra Starr, Lil Kesh, Ed Sheeran and more'
-        },
-
-        {
-            imageSrc: '/album-art@2x.png',
-            title: 'Chill Mix',
-            description: 'Julia Wolf, Khalid, ayokay and more'
-        },
-        {
-            imageSrc: '/album-art-1@2x.png',
-            title: 'Pop Mix',
-            description: 'Hey Violet, VÉRITÉ, Timeflies and more'
-        },
-    ];
+    if (isLoading) return <TopMixesSectionSkeleton/>;
+  if (error) return <div>{error}</div>;
 
     return (
         <>
@@ -77,14 +24,15 @@ function ListingYourTopMixes() {
 
                 {/* TOP MIX LIST */}
                 <div className='grid grid-cols-2 lg:grid-cols-5 gap-4 2xl:gap-[30px]'>
-                    {topMixes.map((mix, index) => (
-                        <div key={index} className='flex-shrink-0 bg-gray-1400 transition hover:bg-gray-1500 hover:transition rounded-lg p-5 cursor-pointer overflow-hidden group'>
+                    {topMixes?.map((mix, index) => (
+                        <Link href={`/yourTopMixes/tracks/${mix?.id}`}>
+                            <div key={index} className='flex-shrink-0 bg-gray-1400 transition hover:bg-gray-1500 hover:transition rounded-lg p-5 cursor-pointer overflow-hidden group'>
                             <div className='relative'>
                                 <Image
-                                    src={mix.imageSrc}
+                                    src={mix?.picture}
                                     width={364}
                                     height={364}
-                                    alt={mix.title}
+                                    alt={mix?.title}
                                     className='w-full rounded mb-6'
                                 />
                                 {/* PLAY BUTTON */}
@@ -93,9 +41,11 @@ function ListingYourTopMixes() {
                                 </div>
                             </div>
 
-                            <h5 className='self-stretch relative tracking-[0.03em] text-base md:text-xl text-white line-clamp-2 font-bold mb-2'>{mix.title}</h5>
-                            <h6 className='self-stretch relative text-base md:text-[1.125rem] md:leading-[1.278rem] text-darkgray-100 line-clamp-2'>{mix.description}</h6>
+                            <h5 className='self-stretch relative tracking-[0.03em] text-base md:text-xl text-white line-clamp-2 font-bold mb-2'>{mix?.title}</h5>
+                            <h6 className='self-stretch relative text-base md:text-[1.125rem] md:leading-[1.278rem] text-darkgray-100 line-clamp-2'>{mix?.type}</h6>
                         </div>
+                        </Link>
+
                     ))}
                 </div>
             </div>

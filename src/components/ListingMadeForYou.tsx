@@ -1,72 +1,20 @@
-import React from 'react'
+'use client';
+import React, { useEffect } from 'react'
 import Image from "next/image";
+import { useMadeForYouStore } from '@/store/useMadeForYouStore';
+import MadeForYouSectionSkeleton from './loaders/MadeForYouSectionSkeleton';
+import Link from 'next/link';
 
 function ListingMadeForYou() {
 
-    const madeForYou = [
-        {
-            imageSrc: '/album-art@2x.png',
-            title: 'Chill Mix',
-            description: 'Julia Wolf, Khalid, ayokay and more'
-        },
-        {
-            imageSrc: '/album-art-1@2x.png',
-            title: 'Pop Mix',
-            description: 'Hey Violet, VÉRITÉ, Timeflies and more'
-        },
-        {
-            imageSrc: '/album-art-2@2x.png',
-            title: 'Pheelz Mix',
-            description: 'WizKid, Asake, Tiwa Savage and more'
-        },
-        {
-            imageSrc: '/album-art-3@2x.png',
-            title: 'Indie Mix',
-            description: 'Joywave, The xx, The Neighbourhood and...'
-        },
-        {
-            imageSrc: '/album-art-4@2x.png',
-            title: 'Daily Mix 1',
-            description: 'Ayra Starr, Lil Kesh, Ed Sheeran and more'
-        },
+    const { madeForYou, isLoading, error, fetchMadeForYou } = useMadeForYouStore();
 
-        {
-            imageSrc: '/album-art-1@2x.png',
-            title: 'Pop Mix',
-            description: 'Hey Violet, VÉRITÉ, Timeflies and more'
-        },
-        {
-            imageSrc: '/album-art-3@2x.png',
-            title: 'Indie Mix',
-            description: 'Joywave, The xx, The Neighbourhood and...'
-        },
-        {
-            imageSrc: '/album-art@2x.png',
-            title: 'Chill Mix',
-            description: 'Julia Wolf, Khalid, ayokay and more'
-        },
-        {
-            imageSrc: '/album-art-2@2x.png',
-            title: 'Pheelz Mix',
-            description: 'WizKid, Asake, Tiwa Savage and more'
-        },
-        {
-            imageSrc: '/album-art-4@2x.png',
-            title: 'Daily Mix 1',
-            description: 'Ayra Starr, Lil Kesh, Ed Sheeran and more'
-        },
+    useEffect(() => {
+        fetchMadeForYou();
+    }, [fetchMadeForYou]);
 
-        {
-            imageSrc: '/album-art@2x.png',
-            title: 'Chill Mix',
-            description: 'Julia Wolf, Khalid, ayokay and more'
-        },
-        {
-            imageSrc: '/album-art-1@2x.png',
-            title: 'Pop Mix',
-            description: 'Hey Violet, VÉRITÉ, Timeflies and more'
-        },
-    ];
+    if (isLoading) return <MadeForYouSectionSkeleton/>;
+    if (error) return <div>{error}</div>;
 
     return (
         <>
@@ -77,14 +25,15 @@ function ListingMadeForYou() {
 
                 {/* TOP MADE FOR YOU LIST */}
                 <div className='grid grid-cols-2 lg:grid-cols-5 gap-4 2xl:gap-[30px]'>
-                    {madeForYou.map((made, index) => (
-                        <div key={index} className='flex-shrink-0 bg-gray-1400 transition hover:bg-gray-1500 hover:transition rounded-lg p-5 cursor-pointer overflow-hidden group'>
+                    {madeForYou?.map((made, index) => (
+                        <Link href={`/madeForYou/tracks/${made.id}`}>
+                            <div key={index} className='flex-shrink-0 bg-gray-1400 transition hover:bg-gray-1500 hover:transition rounded-lg p-5 cursor-pointer overflow-hidden group'>
                             <div className='relative'>
                                 <Image
-                                    src={made.imageSrc}
+                                    src={made?.picture}
                                     width={364}
                                     height={364}
-                                    alt={made.title}
+                                    alt={made?.title}
                                     className='w-full rounded mb-6'
                                 />
                                 {/* PLAY BUTTON */}
@@ -93,9 +42,11 @@ function ListingMadeForYou() {
                                 </div>
                             </div>
 
-                            <h5 className='self-stretch relative tracking-[0.03em] text-base md:text-xl text-white line-clamp-2 font-bold mb-2'>{made.title}</h5>
-                            <h6 className='self-stretch relative text-base md:text-[1.125rem] md:leading-[1.278rem] text-darkgray-100 line-clamp-2'>{made.description}</h6>
+                            <h5 className='self-stretch relative tracking-[0.03em] text-base md:text-xl text-white line-clamp-2 font-bold mb-2'>{made?.title}</h5>
+                            <h6 className='self-stretch relative text-base md:text-[1.125rem] md:leading-[1.278rem] text-darkgray-100 line-clamp-2'>{made?.type}</h6>
                         </div>
+                        </Link>
+
                     ))}
                 </div>
             </div>
