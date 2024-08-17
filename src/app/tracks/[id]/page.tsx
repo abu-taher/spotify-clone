@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import HeaderListing from '@/components/HeaderListing';
 import Sidebar from '@/components/Sidebar';
@@ -10,6 +10,7 @@ import { usePlayerStore } from '@/store/usePlayerStore';
 
 
 export default function Tracks({ params }: { params: { id: string } }) {
+    const [openSidebar, setOpenSidebar] = useState(false);   
     const albumId = params.id;
     const { album, tracks, loading, error, fetchAlbumDetails } = useCarouselStore();
     const { playTrack } = usePlayerStore(); // Extract playTrack function from player store
@@ -26,9 +27,9 @@ export default function Tracks({ params }: { params: { id: string } }) {
     return (
         <>
             <div className="flex">
-                <Sidebar />
+                <Sidebar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
                 <main className="w-full h-[calc(100vh-72px)] overflow-y-auto bg-yellow-color flex flex-col gap-[50px] pb-[22px]">
-                    <HeaderListing />
+                    <HeaderListing setOpenSidebar={setOpenSidebar} />
                     {album && (
                         <div className="px-4 lg:px-10 mb-7">
                             <div className="flex flex-col md:flex-row gap-8">

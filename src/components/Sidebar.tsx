@@ -3,11 +3,16 @@ import Link from 'next/link';
 import React from 'react';
 import { usePathname } from 'next/navigation';
 
-function Sidebar() {
+type SidebarProps = {
+    openSidebar: boolean;
+    setOpenSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function Sidebar({ openSidebar, setOpenSidebar }: SidebarProps) {
     const pathname = usePathname();
 
     return (
-        <div className='bg-black w-[310px] h-[calc(100vh-72px)] hidden lg:block'>
+        <div className={`bg-black fixed lg:relative inset-0 lg:inset-[unset] w-full lg:w-[310px] h-full lg:h-[calc(100vh-72px)] z-[100] pt-4 lg:pt-0 ${openSidebar ? "translate-x-0 transition" : "-translate-x-full lg:translate-x-0 transition"}`}>
             {/* NAVBAR */}
             <nav className='py-4 px-7'>
                 {/* LIST */}
@@ -72,6 +77,9 @@ function Sidebar() {
                     </li>
                 </ul>
             </nav>
+            <div className='absolute top-0 right-0 p-6 lg:hidden' onClick={()=> setOpenSidebar(false)}>
+                <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" className=" w-6 h-6 fill-white"><path d="M3.293 3.293a1 1 0 0 1 1.414 0L12 10.586l7.293-7.293a1 1 0 1 1 1.414 1.414L13.414 12l7.293 7.293a1 1 0 0 1-1.414 1.414L12 13.414l-7.293 7.293a1 1 0 0 1-1.414-1.414L10.586 12 3.293 4.707a1 1 0 0 1 0-1.414z" /></svg>
+            </div>
         </div>
     );
 }

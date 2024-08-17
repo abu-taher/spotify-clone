@@ -12,10 +12,14 @@ type CarouselHandle = {
   scrollNext: () => void;
 };
 
-function Hero() {
+type HeroProps = {
+  setOpenSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function Hero({ setOpenSidebar }: HeroProps) {
   const carouselRef = useRef<CarouselHandle>(null);
 
-  const { carousel, loading, error, fetchCarousel } = useCarouselStore(); 
+  const { carousel, loading, error, fetchCarousel } = useCarouselStore();
 
   useEffect(() => {
     fetchCarousel();
@@ -35,7 +39,7 @@ function Hero() {
 
   if (loading)
     return (
-      <HeaderSkeleton/>
+      <HeaderSkeleton />
     );
   if (error) return <p>{error}</p>; 
 
@@ -79,7 +83,7 @@ function Hero() {
           </div>
 
           {/* RIGHT USER */}
-          <div>
+          <div className='flex items-center gap-4'>
             <div className="w-fit rounded-full bg-gray-900 flex flex-row items-start justify-start pt-[0.187rem] pb-[0.187rem] pl-[0.187rem] pr-2.5 box-border gap-[0.687rem] z-[1] cursor-pointer">
               <Image
                 src="/brand-placeholder-one@2x.png"
@@ -102,6 +106,9 @@ function Hero() {
                   className="w-[1rem] h-[1rem] relative"
                 />
               </div>
+            </div>
+            <div className='lg:hidden' onClick={()=> setOpenSidebar(true)}>
+              <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" className=" w-6 h-6 fill-white"><path d="M21 6H3V4h18v2zm0 14H3v-2h18v2zm0-7H3v-2h18v2z" /></svg>
             </div>
           </div>
         </header>
