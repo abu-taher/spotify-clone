@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-// import albumsData from '../../../utils/albums.json';
 export async function GET(req: NextRequest) {
   try {
     // // Fetch the list of albums from the Deezer API
